@@ -1,0 +1,12 @@
+.DS_Store
+.venv/
+env/
+.env
+logs/
+postgres-ssl
+get-pip.py
+__pycache__/
+__init__.py
+target/
+*.jar
+dbt_packages/

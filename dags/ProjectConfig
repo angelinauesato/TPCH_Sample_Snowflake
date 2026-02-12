@@ -1,0 +1,24 @@
+from pathlib import Path
+from cosmos import ProjectConfig, ProfileConfig
+from cosmos.profiles import SnowflakeUserPasswordProfileMapping
+
+# The path where Docker sees your files
+DBT_ROOT_PATH = Path("/opt/airflow/dbt")
+
+project_config = ProjectConfig(
+    dbt_project_path=DBT_ROOT_PATH,
+)
+
+profile_config = ProfileConfig(
+    profile_name="tpch_snowflake_project", # Must match dbt_project.yml
+    target_name="dev",
+    profile_mapping=SnowflakeUserPasswordProfileMapping(
+        conn_id="snowflake_conn", 
+        profile_args={
+            "database": "dbt_production",
+            "warehouse": "dbt_wh",
+            "role": "dbt_role",
+            "schema": "tpch_prod" 
+        },
+    ),
+)
