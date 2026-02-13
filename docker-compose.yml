@@ -31,6 +31,11 @@ services:
       - AIRFLOW__CORE__LOAD_EXAMPLES=False
       - DBT_PROJECT_DIR=/opt/airflow/dbt
       - DBT_PROFILES_DIR=/opt/airflow/dbt
+      # --- ADDED SNOWFLAKE VARS ---
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT}
+      - SNOWFLAKE_USER=${SNOWFLAKE_USER}
+      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
+      # ----------------------------
     ports:
       - "8080:8080"
     volumes:
@@ -49,6 +54,11 @@ services:
     environment:
       - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
       - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      # --- ADDED SNOWFLAKE VARS ---
+      - SNOWFLAKE_ACCOUNT=${SNOWFLAKE_ACCOUNT}
+      - SNOWFLAKE_USER=${SNOWFLAKE_USER}
+      - SNOWFLAKE_PASSWORD=${SNOWFLAKE_PASSWORD}
+      # ----------------------------
     volumes:
       - ./dags:/opt/airflow/dags
       - ./logs:/opt/airflow/logs

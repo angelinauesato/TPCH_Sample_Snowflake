@@ -5,6 +5,8 @@ from airflow import DAG
 from cosmos import DbtTaskGroup, ProjectConfig, ProfileConfig, RenderConfig, ExecutionConfig # Added ExecutionConfig
 from cosmos.profiles import SnowflakeUserPasswordProfileMapping
 from cosmos.constants import LoadMode
+from datetime import timedelta
+
 # 1. Define the internal path where your dbt folder is mounted
 # In your docker-compose, you mapped ./dbt to /opt/airflow/dbt
 DBT_PROJECT_PATH = Path("/opt/airflow/dbt")
@@ -25,6 +27,14 @@ profile_config = ProfileConfig(
     ),
 )
 
+def dag_failure_callback(context):
+
+    dag_id = context.get('task_instance').dag_id
+    task_id = context.get('task_instance').task_id
+    error_msg = f"❌ Task Failed! \nDAG: {dag_id} \nTask: {task_id}"
+    
+    print(error_msg)
+
 with DAG(
     dag_id="dbt_cosmos_snowflake",
     start_date=datetime(2024, 1, 1),
@@ -34,6 +44,7 @@ with DAG(
 
     # 3. Create the TaskGroup that renders dbt models as Airflow tasks
     dbt_run_group = DbtTaskGroup(
+        # group_id="dbt_daily_run", # for daily runs
         project_config=ProjectConfig(
             dbt_project_path=DBT_PROJECT_PATH,
         ),
@@ -42,11 +53,12 @@ with DAG(
             dbt_executable_path="/home/airflow/.local/bin/dbt",
         ),
         operator_args={
-            "install_deps": True, # This runs 'dbt deps' automatically
+            "install_deps": True,  # This runs 'dbt deps' automatically
+            "on_failure_callback": dag_failure_callback,
         },
         render_config=RenderConfig(
             LoadMode.DBT_LS, 
-            #select=["path:models"], # By removing the select, it will read models, snapshot and macros
+            # select=["tag:daily"], # This is for daily runs in the future
         ),
     )
 

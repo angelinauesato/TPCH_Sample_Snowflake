@@ -1,3 +1,4 @@
+---
 name: 'tpch_snowflake_project'
 version: '1.0.0'
 config-version: 2
@@ -19,13 +20,15 @@ clean-targets:
 
 models:
   tpch_snowflake_project:
-    +materialized: view
-  staging:
-    +materialized: view
-  intermediate:
-    +materialized: view
-  mart:
-    +materialized: table
-    +schema: mart
-  utilities:
-    +materialized: table
+    +persist_docs:
+      relation: true
+      columns: true
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    mart:
+      +materialized: table
+      +schema: mart
+    utilities:
+      +materialized: table

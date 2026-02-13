@@ -1,0 +1,15 @@
+---
+version: 2
+
+models:
+  - name: fct_supplier_performance
+    description: "Vendor quality and cost metrics."
+    columns:
+      - name: supplier_id
+        tests:
+          - not_null
+      - name: late_shipment_rate
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0
+              max_value: 100

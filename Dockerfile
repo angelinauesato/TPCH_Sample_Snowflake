@@ -1,6 +1,9 @@
 # Use the official Apache Airflow image (Airflow 2.10)
 FROM apache/airflow:2.10.2
 
+# Install yamllint via pip
+RUN pip install --no-cache-dir yamllint
+
 # Switch to root to install system-level dependencies (if needed)
 USER root
 RUN apt-get update && \

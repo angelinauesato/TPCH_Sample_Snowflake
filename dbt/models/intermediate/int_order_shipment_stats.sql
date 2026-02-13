@@ -9,6 +9,7 @@ lineitems AS (
 int_order_shipment_stats AS (
     SELECT
         order_id,
+        supplier_id,
         ship_date,
         order_date,
         -- Snowflake date subtraction: result is an integer (days)

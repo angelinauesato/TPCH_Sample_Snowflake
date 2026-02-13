@@ -1,0 +1,9 @@
+---
+version: 2
+
+models:
+  - name: int_part_price_variance
+    description: "Calculates variance against average part costs."
+    columns:
+      - name: variance_pct
+        description: "Percentage difference from average."

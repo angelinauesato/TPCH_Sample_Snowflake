@@ -1,0 +1,19 @@
+---
+version: 2
+
+models:
+  - name: stg_part
+    description: "Metadata for individual parts, including manufacturer and retail price."
+    columns:
+      - name: part_id
+        tests:
+          - unique
+          - not_null
+      - name: part_name
+      - name: manufacturer
+      - name: brand
+      - name: part_type
+      - name: part_size
+      - name: container
+      - name: retail_price
+      - name: comment

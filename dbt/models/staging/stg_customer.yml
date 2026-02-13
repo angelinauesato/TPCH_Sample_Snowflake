@@ -1,0 +1,18 @@
+---
+version: 2
+
+models:
+  - name: stg_customer
+    description: "Customer profile information data including names, addresses, and market segments."
+    columns:
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_name
+      - name: address
+      - name: nation_id
+      - name: phone_number
+      - name: account_balance
+      - name: market_segment
+      - name: comment

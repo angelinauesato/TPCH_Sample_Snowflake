@@ -1,0 +1,28 @@
+---
+version: 2
+
+models:
+  - name: stg_lineitem
+    description: "Individual items within an order."
+    columns:
+      - name: lineitem_key
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+      - name: part_id
+      - name: supplier_id
+      - name: line_number
+      - name: quantity
+      - name: extended_price
+      - name: discount_percentage
+      - name: tax_rate
+      - name: return_flag
+      - name: line_status
+      - name: ship_date
+      - name: commit_date
+      - name: receipt_date
+      - name: ship_instructions
+      - name: ship_mode
+      - name: comment
+

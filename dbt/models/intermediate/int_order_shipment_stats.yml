@@ -1,0 +1,18 @@
+---
+version: 2
+
+models:
+  - name: int_order_shipment_stats
+    description: "Calculates shipping metrics.
+      Used to identify bottlenecks in the fulfillment process."
+    columns:
+      - name: order_id
+      - name: supplier_id
+      - name: ship_date
+      - name: order_date
+      - name: days_to_ship
+        description: "Days between order and shipping."
+        tests:
+          - dbt_utils.accepted_range:
+              min_value: 0 # You can't ship before they order!
+      - name: is_late_shipment

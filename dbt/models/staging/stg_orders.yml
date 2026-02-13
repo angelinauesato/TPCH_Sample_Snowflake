@@ -1,0 +1,23 @@
+---
+version: 2
+
+models:
+  - name: stg_orders
+    description: "Cleaned orders data from TPC-H."
+    columns:
+      - name: order_id
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+      - name: order_status_code
+        tests:
+          - accepted_values:
+              values: ['F', 'O', 'P']  # Finished, Open, Pending
+      - name: total_price
+      - name: order_date
+      - name: order_priority_level
+      - name: order_priority_label
+      - name: clerk_id
+      - name: ship_priority
+      - name: comment
