@@ -4,6 +4,14 @@ This project implements a robust, containerized ELT pipeline using the Modern Da
 It transforms raw TPC-H data into business-ready dimensions and facts.
 The focus of this project was on implementing production-grade features: layered data modelling, automated testing, and orchestrated scheduling via Airflow.
 
+```mermaid
+graph LR
+    A[Raw Data] --> B[Snowflake Staging]
+    B --> C[dbt Intermediate]
+    C --> D[Business Marts]
+    D --> E[BI Tool]
+```
+
 # 🛠 Tech Stack
 **Data Warehouse:** Snowflake (Storage and Compute)
 
