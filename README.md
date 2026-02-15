@@ -42,13 +42,22 @@ Instead of treating DBT as a "black box," I utilized Astronomer Cosmos to render
 Task-level visibility into failures.
 
 The ability to run tests immediately after specific model builds.
+<img width="826" height="578" alt="Screenshot 2026-02-14 at 5 03 53 PM" src="https://github.com/user-attachments/assets/f1b2b244-c574-4c0d-a3cd-627cf6190485" />
+
 
 ## 2. Production-Grade Reliability
 **Retries:** Tasks are configured with a 5-minute retry delay to handle transient Snowflake connection issues.
 
 **Error Handling:** Implemented a custom dag_failure_callback that triggers automated email alerts upon task failure.
 
-**Schema Governance:** Used a custom generate_schema_name macro to manage dynamic schema environments (Staging, Intermediate, Mart) in Snowflake.
+**Schema Governance:** Used a custom generate_schema_name macro to manage dynamic schema environments (Staging, Intermediate, Mart) in Snowflake.<br />
+For this example, I created another schema for the models. <br />
+<img width="381" height="356" alt="Screenshot 2026-02-14 at 4 49 08 PM" src="https://github.com/user-attachments/assets/2849d0ac-1561-4a32-9bb9-e595bfbcefa4" /><br />
+
+ - Staging and Intermediate models will persist in the TPCH_PROD: <br />
+<img width="373" height="765" alt="Screenshot 2026-02-14 at 5 03 09 PM" src="https://github.com/user-attachments/assets/a179916f-8633-4544-8b27-c3783b1a5df6" /><br />
+- Snapshots in the Snapshot schema and Fact and Dim tables in Mart schema: <br />
+<img width="358" height="563" alt="Screenshot 2026-02-14 at 5 02 48 PM" src="https://github.com/user-attachments/assets/610252e2-9818-4df1-ad8f-d8a58199aec3" />
 
 ## 3. Automated Data Quality
 Over 15 data tests are embedded in the pipeline, including:
